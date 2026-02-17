@@ -11,15 +11,21 @@ ZSH_CUSTOM=$HOME/.dotfiles/oh-my-zsh-custom
 # time that oh-my-zsh is loaded.
 ZSH_THEME="agnoster"
 AGNOSTER_DIR_FG=black
+DEFAULT_USER=`whoami`
+plugins=(git z)
+
 source $ZSH/oh-my-zsh.sh
 
-plugins=(git z zsh-autosuggestions zsh-syntax-highlighting)
+# Enable autosuggestions (installed via brew)
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Enable syntax highlighting (installed via brew)
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-source ~/.aliases
+# Load the shell dotfiles, and then some:
+# * ~/.dotfiles-custom can be used for other settings you don’t want to commit.
+for file in ~/.dotfiles/home/.{exports,aliases,functions}; do
+	[ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
