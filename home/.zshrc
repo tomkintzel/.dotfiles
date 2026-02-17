@@ -27,6 +27,17 @@ for file in ~/.dotfiles/home/.{exports,aliases,functions}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
 
+for file in ~/.dotfiles-custom/shell/.{exports,aliases,functions,zshrc}; do
+	[ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+unset file
+
+export PATH=$HOME/.dotfiles/bin:$PATH
+
+# Setup xdebug
+export XDEBUG_CONFIG="idekey=VSCODE"
+
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
